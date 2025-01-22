@@ -50,7 +50,7 @@ class ParsePlayTechOneLogin
         
     }
 
-    public function handle(array $users)
+    public function handle(array $users):void
     {
         try {
             $driver = $this->setupBrowser();
@@ -94,9 +94,7 @@ class ParsePlayTechOneLogin
         $driver->findElement(WebDriverBy::id('password')) // find search input element
         ->sendKeys($this->password);
         $driver->findElement(WebDriverBy::id('password'))->submit();
-		
-        sleep(20);
-		
+
 	}
 
     private function goToReportPage(RemoteWebDriver $driver, array $users): void
@@ -131,7 +129,7 @@ class ParsePlayTechOneLogin
 
     }
 
-    private function setNameAndLoad(RemoteWebDriver $driver, string $userName = 'olivka'): void
+    private function setNameAndLoad(RemoteWebDriver $driver, string $userName = ''): void
     {
         $driver->findElement(WebDriverBy::id('username_Reporting___Player_wallet_transactions_inputField'))->clear() // username
         ->sendKeys($userName);
