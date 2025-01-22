@@ -58,7 +58,7 @@ I will add this option for you in the next update.
 
 5. **Run the PHP Script:** If the script you're executing is script.php and it’s located in the /IMS-scraping folder, you can run the script using PHP like this:
 
-<pre >php /IMS-scraping/index.php</pre>
+<pre >php index.php</pre>
 
 If there are dependencies or environment variables required by the script, ensure they are properly configured before running the script.
 
