@@ -1,7 +1,7 @@
 # IMS-scraping
 
 This is an example of IMS scraping using Selenium WebDriver with PHP 8.3 and the Firefox WebDriver in headless mode.
-@see classes/ReporterIMSLibrary.php
+@see classes/ParsePlayTechOneLogin.php
 
 Please remove the --headless option and test step-by-step at least once.
 You can set up and use ChromeDriver for Windows instead.
