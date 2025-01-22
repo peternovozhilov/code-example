@@ -7,7 +7,7 @@ Please remove the --headless option and test step-by-step at least once.
 You can set up and use ChromeDriver for Windows instead.
 I will add this option for you in the next update.
 
-## **Class: ReporterIMSLibrary**
+## **Class: ParsePlayTechOneLogin**
 ### **Properties**
 
 |**Property**|**Type**|**Description**|
