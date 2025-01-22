@@ -12,15 +12,14 @@ I will add this option for you in the next update.
 
 |**Property**|**Type**|**Description**|
 | :-: | :-: | :-: |
-|$path|string|Directory path to save reports.|
+|$path|string|The directory path to save reports.|
 |$userName|string|IMS username for login.|
 |$password|string|IMS password for login.|
 |$reportUrl|string|Base URL for accessing reports.|
 |$url|string|URL for IMS login page.|
-|$seleniumUrl|string|Selenium WebDriver URL.|
 |$tmpPath|string|Temporary directory for downloads.|
 |$waitTimeout|int|Timeout duration for waiting operations.|
-|$seleniumUrl|string|Url for Selenium Web Driver.|
+|$seleniumUrl|string|URL for Selenium Web Driver.|
 
 
 ### **Methods**
@@ -30,11 +29,11 @@ I will add this option for you in the next update.
 - Configures a Firefox browser profile for downloading files.
 - Returns an initialized RemoteWebDriver instance.
 #### **login(RemoteWebDriver $driver) : void**
-- Navigates to the login page and authenticates the user.
+- Logs into the IMS system.
 #### **goToReportPage(RemoteWebDriver $driver) : void**
 - Navigates to the specified report page.
 #### **loadReport(RemoteWebDriver $driver, string $startDate = null, string $endDate = null) : void**
-- Inputs date ranges to filter the report.
+- Sets date ranges to filter the report.
 - Defaults to the current day if dates are not provided.
 #### **setNameAndLoad(RemoteWebDriver $driver, string $userName = '') : bool**
 - Triggers the download of a report in the specified format (JSON or CSV).
@@ -64,8 +63,8 @@ If there are dependencies or environment variables required by the script, ensur
 
 ### **Additional Notes:**
 - You will need to install Firefox/Firefox Web driver + LAMP + Composer
-- Make sure you have **Java** installed on your machine, as this command runs the Selenium server using Java (run java -version from the command string).
+- Make sure you have **Java** installed on your machine, as this command runs the Selenium server using Java (run java -version from the command line).
 - Make sure the selenium-server.jar file is located in a directory accessible from where you are running the java command. If it's in a different location, specify the full path to the JAR file.
 - If your PHP script (index.php) interacts with Selenium (for example, using WebDriver for browser automation), ensure that the Selenium server is running before executing the PHP script.
 - If the project requires a specific configuration or additional steps, check the repository documentation (e.g., README.md) for further instructions.
-- Ask me for the valid .env file with all credentials
+- Contact the repository owner to request the valid `.env` file with all required credentials.
