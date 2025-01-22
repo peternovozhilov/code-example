@@ -14,20 +14,20 @@ ini_set('max_execution_time', 18000);
 class ParsePlayTechOneLogin
 {
 
-	private $path = '';
-	private $reportUrl = '';
-	private $url = '';
-	private $seleniumUrl = 'http://localhost:4444';
-	private $waitTimeout = 18000;
+    private $path = '';
+    private $reportUrl = '';
+    private $url = '';
+    private $seleniumUrl = 'http://localhost:4444';
+    private $waitTimeout = 18000;
 
     private $userName = '';
 
     private $password = '';
 
-    private $short_timeout = 2;
-    private $long_timeout = 6;
+    private $shortTimeout = 2;
+    private $longTimeout = 6;
 
-    public function __construct(string $imsUser,string $imsPassword,string $path,string $reportUrl, string $url = '#', int $waitTimeout = 18000, string $seleniumUrl = 'http://localhost:4444')
+    public function __construct(string $imsUser, string $imsPassword, string $path, string $reportUrl, string $url = '#', int $waitTimeout = 18000, string $seleniumUrl = 'http://localhost:4444')
     {
 
         $this->reportUrl = $reportUrl;
@@ -36,21 +36,21 @@ class ParsePlayTechOneLogin
         $this->seleniumUrl = $seleniumUrl;
 
         if (!file_exists($path)) {
-			mkdir($path,0775);
-		}
+            mkdir($path, 0775);
+        }
 
         if (!file_exists($path)) {
             throw new \Exception('Path does not exist');
         }
 
-		$this->path = $path;
-		
-		$this->userName = $imsUser;
+        $this->path = $path;
+
+        $this->userName = $imsUser;
         $this->password = $imsPassword;
-        
+
     }
 
-    public function handle(array $users):void
+    public function handle(array $users): void
     {
         try {
             $driver = $this->setupBrowser();
@@ -58,11 +58,11 @@ class ParsePlayTechOneLogin
 
             $this->login($driver);
 
-            $this->goToReportPage($driver,$users);
+            $this->goToReportPage($driver, $users);
             $this->loadReport($driver);
 
         } catch (\Exception $exception) {
-            echo ($exception->getMessage());
+            echo($exception->getMessage());
         }
     }
 
@@ -70,14 +70,14 @@ class ParsePlayTechOneLogin
     {
         $profile = new FirefoxProfile();
         $firefoxOptions = new FirefoxOptions();
-		
+
         $profile->setPreference('browser.download.folderList', 2);
         $profile->setPreference('browser.helperApps.neverAsk.saveToDisk', 'text/plain');
         $profile->setPreference('browser.download.dir', $this->path);
-        
-		$firefoxOptions->addArguments(['--headless', '--disable-gpu', 'profile.default_content_settings.popups=true']);
-		
-		$cap = DesiredCapabilities::firefox();
+
+        $firefoxOptions->addArguments(['--headless', '--disable-gpu', 'profile.default_content_settings.popups=true']);
+
+        $cap = DesiredCapabilities::firefox();
         $firefoxOptions->setProfile($profile);
 
         $cap->setCapability(FirefoxOptions::CAPABILITY, $firefoxOptions);
@@ -89,13 +89,13 @@ class ParsePlayTechOneLogin
     {
         $driver->get($this->url);
 
-		$driver->findElement(WebDriverBy::id('username')) // find search input element
+        $driver->findElement(WebDriverBy::id('username')) // find search input element
         ->sendKeys($this->userName); // fill the search box
         $driver->findElement(WebDriverBy::id('password')) // find search input element
         ->sendKeys($this->password);
         $driver->findElement(WebDriverBy::id('password'))->submit();
 
-	}
+    }
 
     private function goToReportPage(RemoteWebDriver $driver, array $users): void
     {
@@ -104,9 +104,9 @@ class ParsePlayTechOneLogin
         $this->loadReport($driver);
 
         foreach ($users as $user) {
-            
-			echo $user."\n";
-			
+
+            echo $user . "\n";
+
             $this->setNameAndLoad($driver, $user);
 
         }
@@ -125,7 +125,6 @@ class ParsePlayTechOneLogin
         $driver->findElement(WebDriverBy::xpath('//*[@id="input-90"]')) // open date range
         ->sendKeys(WebDriverKeys::CONTROL . 'a')->sendKeys(WebDriverKeys::BACKSPACE)->sendKeys($endDate);
 
-        sleep(1);
 
     }
 
@@ -138,10 +137,10 @@ class ParsePlayTechOneLogin
         $el = WebDriverBy::xpath('//button[.//span[contains(text(), "CSV")]]');
 
         $driver->findElement($el)->click();
-        sleep($this->short_timeout);
+        sleep($this->shortTimeout);
 
         while (!$driver->findElement($el)->isEnabled()) {
-            sleep($this->long_timeout);
+            sleep($this->longTimeout);
         }
     }
 }
